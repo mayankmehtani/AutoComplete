@@ -10,6 +10,7 @@ make
 
 The program will prompt the user to input a prefix and how many suggestions they would like to see. AutoComplete will first traverse down the tree to the given prefix. If a prefix does not exist (e.g. "yoiausdflkjhscviuhqkewrqsvx") zero suggestions will be returned.
 
-After traversing to the prefix in the tree, AutoComplete will run a breadth first search to return the number of completions the user requested. The priority queue in the breadth first search will manage priority for nodes using the maximum frequency of descendents variable. The program will return if the number of predictions has been reached or if the priority queue is empty. An empty priority queue signifies AutoComplete completed traversing the entire tree for the user's prefix and returned the maximum possible number of predictions from their prefix. You can see examples of the program running below.
+After traversing to the prefix in the tree, AutoComplete will run a breadth first search to return the number of completions the user requested. The priority queue in the breadth first search will manage the priority of the nodes using the maximum frequency of descendents variable, thereby ensuring we always return the words with the highest set frequency. The program will return our results if we find the requested number of words or if the priority queue becomes empty. An empty priority queue signifies AutoComplete has completed traversing the entire tree for all the possible words from the user's prefix. You can see examples of the program running below.
+
 
 ![AutoComplete running](https://github.com/mayankmehtani/AutoComplete/blob/master/example.png)
