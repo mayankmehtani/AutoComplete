@@ -5,7 +5,7 @@ We load the MultiWay Tree with a list of words along with their counts from a te
 
 ```sh
 make
-./benchdict unique_freq_dict.txt
+./benchtrie unique_freq_dict.txt
 ```
 
 The program will prompt the user to input a prefix and how many suggestions they would like to see. AutoComplete will first traverse down the tree to the given prefix. If a prefix does not exist (e.g. "yoiausdflkjhscviuhqkewrqsvx") zero suggestions will be returned.
