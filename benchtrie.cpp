@@ -140,6 +140,8 @@ void getResults(std::string dict_filename){
     std::cout << "\nAdditional user tests." << std::endl;
     std::cout << "Enter prefix: ";
 
+    
+
     while(std::getline(std::cin, prefix)){
         if ( prefix.compare("PLEASE EXIT") == 0)
             break;
@@ -148,23 +150,39 @@ void getResults(std::string dict_filename){
         std::getline(std::cin, ws);
         num_completions = stoi(ws);
 
-        std::cout << "\n\tUser Test: prefix= \"" << prefix << "\" num_completions= " << num_completions << std::endl;
-        T.begin_timer();
+        int valid = 1;
+        // returns an empty string if the prefix contains any non-alphabet/non-space chars
+        for (char &c: prefix){
+            // check for if it is not a space and not an alphabet
+            if ( (c !=  ' ') && (!(isalpha(c))) ){
+                std::cout << "Invalid Input! prefix cannot contain non-alphabets!" << std::endl;
+                valid = 0;
+                break;
+            }
+        }   
 
-        std::transform(prefix.begin(), prefix.end(), prefix.begin(),
-        [](unsigned char c){ return std::tolower(c); });
+        //if (valid == 0)
+        //    continue;
 
-        results = dictionary_trie->predictCompletions( prefix,num_completions);
-        time_duration = T.end_timer();
-        std::cout << "\tUser Test: time taken: " << time_duration << " nanoseconds." << std::endl;
-        std::cout << "\tUser Test: results found: " <<  results.size() << "\n\n";
-        
-        std::cout << "Most Frequent Words: ";
-        for (std::vector<std::string>::const_iterator i = results.begin(); i != results.end(); ++i)
-            std::cout << *i << ' ';
+        if (valid == 1){
+            std::cout << "\n\tUser Test: prefix= \"" << prefix << "\" num_completions= " << num_completions << std::endl;
+            T.begin_timer();
+
+            std::transform(prefix.begin(), prefix.end(), prefix.begin(),
+            [](unsigned char c){ return std::tolower(c); });
+
+            results = dictionary_trie->predictCompletions( prefix,num_completions);
+            time_duration = T.end_timer();
+            std::cout << "\tUser Test: time taken: " << time_duration << " nanoseconds." << std::endl;
+            std::cout << "\tUser Test: results found: " <<  results.size() << "\n\n";
+            
+            std::cout << "Most Frequent Words: ";
+            for (std::vector<std::string>::const_iterator i = results.begin(); i != results.end(); ++i)
+                std::cout << *i << ' ';
+        }
         std::cout << "\n\n";
 
-        std::cout << "Enter PLEASE EXIT to exit application\n";      
+        std::cout << "Enter 'PLEASE EXIT' to exit application\n";      
         std::cout << "Enter prefix: ";
 
     }
