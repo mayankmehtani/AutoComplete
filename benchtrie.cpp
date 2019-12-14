@@ -141,6 +141,9 @@ void getResults(std::string dict_filename){
     std::cout << "Enter prefix: ";
 
     while(std::getline(std::cin, prefix)){
+        if ( prefix.compare("PLEASE EXIT") == 0)
+            break;
+
         std::cout << "Enter num_completions: ";
         std::getline(std::cin, ws);
         num_completions = stoi(ws);
@@ -150,6 +153,7 @@ void getResults(std::string dict_filename){
 
         std::transform(prefix.begin(), prefix.end(), prefix.begin(),
         [](unsigned char c){ return std::tolower(c); });
+
         results = dictionary_trie->predictCompletions( prefix,num_completions);
         time_duration = T.end_timer();
         std::cout << "\tUser Test: time taken: " << time_duration << " nanoseconds." << std::endl;
@@ -160,7 +164,9 @@ void getResults(std::string dict_filename){
             std::cout << *i << ' ';
         std::cout << "\n\n";
 
+        std::cout << "Enter PLEASE EXIT to exit application\n";      
         std::cout << "Enter prefix: ";
+
     }
 
     delete dictionary_trie;
