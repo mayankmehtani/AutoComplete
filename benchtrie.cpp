@@ -141,14 +141,16 @@ void getResults(std::string dict_filename){
     std::cout << "Enter prefix: ";
 
     while(std::getline(std::cin, prefix)){
-
         std::cout << "Enter num_completions: ";
         std::getline(std::cin, ws);
         num_completions = stoi(ws);
 
         std::cout << "\n\tUser Test: prefix= \"" << prefix << "\" num_completions= " << num_completions << std::endl;
         T.begin_timer();
-        results = dictionary_trie->predictCompletions(prefix,num_completions);
+
+        std::transform(prefix.begin(), prefix.end(), prefix.begin(),
+        [](unsigned char c){ return std::tolower(c); });
+        results = dictionary_trie->predictCompletions( prefix,num_completions);
         time_duration = T.end_timer();
         std::cout << "\tUser Test: time taken: " << time_duration << " nanoseconds." << std::endl;
         std::cout << "\tUser Test: results found: " <<  results.size() << "\n\n";
@@ -160,7 +162,6 @@ void getResults(std::string dict_filename){
 
         std::cout << "Enter prefix: ";
     }
-
 
     delete dictionary_trie;
 }
