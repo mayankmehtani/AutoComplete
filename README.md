@@ -3,7 +3,7 @@ AutoComplete is a software that predicts what word a user is trying to type out.
 
 We load the MultiWay Tree with a list of words along with their frequency from a text file (in this case unique_freq_dict.txt, but you can use any text file with a similar format to this file) and fill out the Tree with words from this list and store the frequency of each word into their respective Node component's frequency variable. If a Node does not represent a word its frequency instance variable will stay at 0, denoting it as a prefix. During insertion, each Node will also have an instance variable that keeps track of the highest frequency of all its descendents.
 
-To execute the application simply run make and then the benchtrie executable with the dictionary provided.
+To execute the application simply run make and then run the benchtrie executable with the dictionary provided.
 
 ```sh
 make
