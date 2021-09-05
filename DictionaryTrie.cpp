@@ -15,7 +15,6 @@ bool MWTNode::operator< (const MWTNode& other){
 
 }
 
-
 /* Insert a word with its frequency into the dictionary.
  * Return true if the word was inserted, and false if it
  * was not (i.e. it was already in the dictionary or it was
